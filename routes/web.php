@@ -8,15 +8,21 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
+
         'canLogin' => Route::has('login'),
+
         'canRegister' => Route::has('register'),
+
         'laravelVersion' => Application::VERSION,
+
         'phpVersion' => PHP_VERSION,
     ]);
 });
 
-Route::get('/dashboard', function () {
+Route::get('/admin/skill/index', function () {
+
     return Inertia::render('Dashboard');
+
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Skill Route
@@ -27,4 +33,18 @@ Route::get('admin/skill/create', [SkillController::class, 'SkillCreate'])->name(
 Route::post('admin/skill/store', [SkillController::class, 'SkillStore'])->name('skill.store');
 
 Route::get('admin/skill/edit/{skill}', [SkillController::class, 'SkillEdit'])->name('skill.edit');
+
+Route::put('admin/skill/update/{skill}',[SkillController::class, 'SkillUpdate'])->name('skill.update');
+
+Route::delete('admin/skill/delete/{skill}', [SkillController::class, 'SkillDelete'])->name('skill.delete');
+
+
+
+
+
+
+
+
+
+
 require __DIR__.'/auth.php';
