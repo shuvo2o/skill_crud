@@ -36,6 +36,8 @@ Route::get('admin/skill/edit/{skill}', [SkillController::class, 'SkillEdit'])->n
 
 Route::put('admin/skill/update/{skill}',[SkillController::class, 'SkillUpdate'])->name('skill.update');
 
+Route::delete('admin/skill/delete/{skill}', [SkillController::class, 'SkillDelete'])->name('skill.delete');
+
 
 
 

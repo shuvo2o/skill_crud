@@ -90,5 +90,17 @@ class SkillController extends Controller
     }
    }
 
+   public function SkillDelete(Skill $skill)
+   {
+    $image = $skill->image;
+    if(File::exists($image)){
+        File::delete($image);
+    }
+
+    $skill->delete();
+    
+    return Redirect::route('skill.index');
+   }
+
 
 }

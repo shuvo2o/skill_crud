@@ -1,7 +1,7 @@
 <script setup>
 import { Link, router } from "@inertiajs/vue3";
 import { Head } from "@inertiajs/vue3";
-// import AdminLayout from "../Admin/Components/AdminLayout.vue";
+
 
 defineProps({
   skills: {
@@ -23,7 +23,6 @@ const updatePageNumber = (link) => {
 </script>
 
 <template>
-  <AdminLayout>
     <Head title="Skill" />
     <h2 class="text-xl text-blue-700 leading-tight text-center">Skills Home Page</h2>
 
@@ -58,15 +57,31 @@ const updatePageNumber = (link) => {
               <Link :href="route('skill.edit', skill.id)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</Link>
 
              </td>
-             
+             <td class="px-6 py-4">
+              <Link :href="route('skill.delete', skill.id)" method="delete" as="button" type="button" class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</Link>
+
+             </td>
             
             </tr>
           </tbody>
         </table>
         
       </div>
+      <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px pt-5" aria-label="Pagination">
+          
+        <button v-for="link in skills.links" :key="link.url || link.label"
+          @click.prevent="updatePageNumber(link)"
+          :disabled="link.active || !link.url"
+          class="relative inline-flex items-center px-4 py-2 border text-sm font-medium"
+          :class="{'z-10 bg-indigo-50 border-indigo-500 text-indigo-600': link.active,
+            'bg-white border-gray-300 text-gray-500 hover:bg-gray-50': !link.active
+          }"
+        >
+          <span v-html="link.label"></span>
+        </button>
+      </nav>
     </div>
-  </AdminLayout>
+
 </template>
 
 <style scoped>
