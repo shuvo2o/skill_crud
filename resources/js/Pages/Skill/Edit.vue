@@ -1,11 +1,14 @@
 <script setup>
 import { Head, Link, useForm, router } from "@inertiajs/vue3";
-import AdminLayout from "../Admin/Components/AdminLayout.vue";
+
 
 
 const props = defineProps({
     skill: Object,
+    
 });
+
+console.log(props.skill.name);
 
 const form = useForm({
     name: props.skill?.name,
@@ -19,13 +22,10 @@ const submit = () =>{
   image: form.image,
 })
 }
-
-
-
 </script>
 
 <template>
-    <AdminLayout>
+  
         <Head title="Skill Edit" />
         <h2 class="text-xl text-blue-700 leading-tight text-center">
             Skill Edit Page
@@ -69,9 +69,9 @@ const submit = () =>{
                 </form>
             </div>
         </div>
-    </AdminLayout>
+  
 </template>
 
 <style>
-/* Your additional styles here */
+
 </style>

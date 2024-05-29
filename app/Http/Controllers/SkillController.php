@@ -44,16 +44,20 @@ class SkillController extends Controller
                 'name' => $request->name,
                 'image' => 'skill_images/' . $uniqueName,
             ]);
-            return Redirect::route('admin/skill/index')->with('success', 'Skill Created Successfully');
+            return Redirect::route('skill.index')->with('success', 'Skill Created Successfully');
         }
     
         return Redirect::back();
 
        
     }
-    public function SkillEdit(Skill $skill){
-            return Inertia::render('Skill/Edit', ['skill' =>$skill]);
-    }
+
+
+   public function SkillEdit( Skill $skill){
+      return Inertia::render('Skill/Edit',[
+          'skill' => $skill,
+      ]);  
+   }
 
 
 }
