@@ -34,7 +34,7 @@ Route::post('admin/skill/store', [SkillController::class, 'SkillStore'])->name('
 
 Route::get('admin/skill/edit/{skill}', [SkillController::class, 'SkillEdit'])->name('skill.edit');
 
-
+Route::put('admin/skill/update/{skill}',[SkillController::class, 'SkillUpdate'])->name('skill.update');
 
 
 

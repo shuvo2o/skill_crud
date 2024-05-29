@@ -53,10 +53,41 @@ class SkillController extends Controller
     }
 
 
-   public function SkillEdit( Skill $skill){
+   public function SkillEdit( Skill $skill)
+   {
       return Inertia::render('Skill/Edit',[
           'skill' => $skill,
       ]);  
+   }
+
+   public function SkillUpdate(Request $request, Skill $skill)
+   {
+    $request->validate([
+        'name'=> ['required','min:3'],
+    ]);
+    $image = $skill->image;
+
+    if ($request->hasFile('image')){
+        if ($skill->image && file_exists(public_path($skill->image))){
+            unlink(public_path($skill->image));
+        }
+
+        $imageFile = $request->file('image');
+        $uniqueName = time(). '-' .Str::random(10) . '.' . $imageFile->getClientOriginalExtension();
+        $imageFile->move(public_path('skill_images'), $uniqueName);
+
+
+        $image = 'skill_images/' . $uniqueName;
+
+
+
+        $skill->update([
+            'name' => $request->name,
+            'image' => $image
+        ]);
+
+        return Redirect::route('skill.index');
+    }
    }
 
 
